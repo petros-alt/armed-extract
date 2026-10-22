@@ -82,62 +82,22 @@
 <body class="min-h-screen flex flex-col">
 
     <!-- ========================================================================= -->
-    <!-- ПАНЕЛЬ НАСТРОЙКИ QR-КОДА, ЯЗЫКА И ПЕЧАТИ (СКРЫВАЕТСЯ ПРИ ПЕЧАТИ / PDF)     -->
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ (БЕЗ ПЕРЕКЛЮЧАТЕЛЯ ЯЗЫКОВ И БЕЗ ПОЛЯ ССЫЛКИ QR-КОДА)        -->
     <!-- ========================================================================= -->
     <div class="no-print bg-slate-900 text-white border-b border-slate-700 sticky top-0 z-50 shadow-lg">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col gap-3">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-2.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="text-xs sm:text-sm font-bold tracking-wide text-slate-100">
-                        Сертификат ARMED (1 визит: 06.07.2023 • Паспорт: AL0473417)
-                    </span>
-                </div>
-
-                <!-- Переключатель языка клинической части -->
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs text-slate-400">Текст заключения врача:</span>
-                    <div class="bg-slate-800 p-1 rounded-lg flex items-center text-xs border border-slate-700">
-                        <button onclick="setClinicalLang('hy')" id="btn-lang-hy" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold transition">
-                            Оригинал (Հայերեն)
-                        </button>
-                        <button onclick="setClinicalLang('hy_ru')" id="btn-lang-hy_ru" class="px-2.5 py-1 rounded text-slate-300 hover:text-white font-medium transition">
-                            Հայերեն + Русский
-                        </button>
-                        <button onclick="setClinicalLang('all')" id="btn-lang-all" class="px-2.5 py-1 rounded text-slate-300 hover:text-white font-medium transition">
-                            3 языка (HY/EN/RU)
-                        </button>
-                    </div>
-
-                    <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition shadow-sm flex items-center gap-1.5">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                        <span>Печать / Сохранить PDF</span>
-                    </button>
-                </div>
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs sm:text-sm font-bold tracking-wide text-slate-100">
+                    Сертификат ARMED (1 визит: 06.07.2023 • Паспорт: AL0473417)
+                </span>
             </div>
 
-            <!-- Живая настройка ссылки внутри QR-кода и даты выгрузки -->
-            <div class="pt-2 border-t border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 text-xs">
-                <div class="flex-1 flex items-center gap-2">
-                    <span class="text-slate-400 shrink-0">Ссылка в QR-коде:</span>
-                    <input
-                        type="text"
-                        id="qr-url-input"
-                        placeholder="Вставьте ссылку, где будет размещен этот HTML-файл..."
-                        class="w-full bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-slate-100 font-mono text-xs focus:outline-none focus:border-emerald-500"
-                        oninput="updateQRCode()"
-                    >
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-slate-400 shrink-0">Дата выгрузки:</span>
-                    <input
-                        type="text"
-                        id="export-date-input"
-                        value="06/07/2023 14:25"
-                        class="w-36 bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-slate-100 font-mono text-xs focus:outline-none focus:border-emerald-500"
-                        oninput="updateExportDate()"
-                    >
-                </div>
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition shadow-sm flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                    <span>Печать / Сохранить PDF</span>
+                </button>
             </div>
         </div>
     </div>
@@ -147,7 +107,7 @@
     <!-- ========================================================================= -->
     <div class="armed-sheet">
 
-        <!-- 1. ВЕРХНЯЯ ГОСУДАРСТВЕННАЯ ШАПКА НА 3 ЯЗЫКАХ (Точно как на скриншоте ARMED) -->
+        <!-- 1. ВЕРХНЯЯ ГОСУДАРСТВЕННАЯ ШАПКА НА 3 ЯЗЫКАХ -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[14px] sm:text-[15px] font-bold tracking-normal leading-tight text-black mb-5">
             <div>
                 ՀԱՅԱՍՏԱՆԻ<br>ՀԱՆՐԱՊԵՏՈՒԹՅՈՒՆ
@@ -171,21 +131,16 @@
             <!-- Векторная копия логотипа ARMED со скриншота -->
             <div class="shrink-0 self-center sm:self-start pt-1">
                 <svg viewBox="0 0 190 128" class="w-36 sm:w-40 h-auto">
-                    <!-- Левая бирюзовая полоса -->
                     <polygon points="16,90 38,24 66,24 44,90" fill="#136a8a"/>
-                    <!-- Внутренняя левая грань буквой M -->
                     <polygon points="38,24 66,24 89,80 63,80" fill="#0d4e6b"/>
-                    <!-- Внутренняя правая грань буквой M -->
                     <polygon points="89,80 116,12 144,12 115,80" fill="#16729c"/>
-                    <!-- Правая длинная синяя грань -->
                     <polygon points="116,12 144,12 176,104 148,104" fill="#095688"/>
-                    <!-- Надпись ARMED тонким геометрическим шрифтом -->
                     <text x="90" y="104" text-anchor="middle" fill="#4b5563" font-size="24" font-weight="300" font-family="Inter, Arial, sans-serif" letter-spacing="2.5">ARMED</text>
                 </svg>
             </div>
         </div>
 
-        <!-- 3. ЗЕЛЕНО-БИРЮЗОВЫЙ БАННЕР СЕРТИФИКАТА (Точный цвет #487a6b) -->
+        <!-- 3. ЗЕЛЕНО-БИРЮЗОВЫЙ БАННЕР СЕРТИФИКАТА -->
         <div class="armed-banner text-center py-5 px-4 my-6 space-y-1.5">
             <div class="text-[16px] sm:text-[18px] font-bold tracking-wide uppercase">
                 ԲԺՇԿԱԿԱՆ ՏԵՂԵԿԱՆՔ / ԽՈՐՀՐԴԱՏՎԱԿԱՆ ԵԶՐԱԿԱՑՈՒԹՅՈՒՆ
@@ -198,7 +153,7 @@
             </div>
         </div>
 
-        <!-- 4. ПЕРСОНАЛЬНЫЕ ДАННЫЕ ПАЦИЕНТА (СВЕРЕНЫ С ПАСПОРТОМ AL0473417) -->
+        <!-- 4. ПЕРСОНАЛЬНЫЕ ДАННЫЕ ПАЦИЕНТА -->
         <div class="max-w-[540px] mx-auto my-7 space-y-3.5 text-[13.5px] sm:text-[14px] leading-snug text-black">
             <!-- Имя -->
             <div class="grid grid-cols-12 gap-4 items-start">
@@ -224,7 +179,7 @@
                 </div>
             </div>
 
-            <!-- Отчество (как в справке: Սամվելի) -->
+            <!-- Отчество -->
             <div class="grid grid-cols-12 gap-4 items-start">
                 <div class="col-span-7 italic">
                     <div>Հայրանուն / Отчество</div>
@@ -236,7 +191,7 @@
                 </div>
             </div>
 
-            <!-- Дата рождения (17.03.1987) -->
+            <!-- Дата рождения -->
             <div class="grid grid-cols-12 gap-4 items-start">
                 <div class="col-span-7 italic">
                     <div>Ծննդյան ամսաթիվ</div>
@@ -247,7 +202,7 @@
                 </div>
             </div>
 
-            <!-- Номер паспорта из приложенного фото паспорта: AL0473417 -->
+            <!-- Номер паспорта -->
             <div class="grid grid-cols-12 gap-4 items-start">
                 <div class="col-span-7 italic">
                     <div>Անձնագրի / նույն. քարտի համարը</div>
@@ -258,7 +213,7 @@
                 </div>
             </div>
 
-            <!-- Адрес проживания из справки -->
+            <!-- Адрес проживания -->
             <div class="grid grid-cols-12 gap-4 items-start">
                 <div class="col-span-7 italic">
                     <div>Բնակության հասցե</div>
@@ -270,7 +225,7 @@
             </div>
         </div>
 
-        <!-- 5. ОСНОВНАЯ СВОДНАЯ ТАБЛИЦА ВИЗИТА В СТИЛЕ ARMED (5 колонок как на скриншотах) -->
+        <!-- 5. ОСНОВНАЯ СВОДНАЯ ТАБЛИЦА ВИЗИТА В СТИЛЕ ARMED -->
         <div class="mt-6">
             <table class="armed-table text-[11.5px] sm:text-[12px] leading-[1.35]">
                 <thead>
@@ -334,7 +289,7 @@
             </table>
         </div>
 
-        <!-- 6. ТАБЛИЦА КЛИНИЧЕСКИХ ДАННЫХ СПРАВКИ (Гангатнер, Объективный осмотр, Диагноз, Назначения) -->
+        <!-- 6. ТАБЛИЦА КЛИНИЧЕСКИХ ДАННЫХ СПРАВКИ -->
         <div class="mt-4">
             <table class="armed-table text-[11.5px] sm:text-[12.5px] leading-[1.42]">
                 <thead>
@@ -363,12 +318,6 @@
                             <p>
                                 Պացիենտը գտնվում է ամբուլատոր հսկողության տակ 2022 թ. մայիսից՝ հարազատի ողբերգական մահվան հետևանքով զարգացած ծանր հետտրավմատիկ սթրեսային խանգարման (PTSD) և վեգետատիվ-անոթային դիստոնիայի կապակցությամբ: Ներկայումս դիմել է կրկնակի՝ նյարդահոգեբանական վիճակի կտրուկ սրացմամբ, որը պայմանավորված է 29.06.2023 թ. իր նկատմամբ կիրառված ֆիզիկական բռնությամբ և սպառնալիքներով: Գանգատվում է կայուն անքնությունից, հաճախակի խուճապային գրոհներից (panic attacks)՝ ուղեկցվող շնչահեղձությամբ, սառը քրտինքով, մարմնի անկառավարելի դողով և սուր տագնապով:
                             </p>
-                            <p class="lang-en hidden border-t border-neutral-300 pt-1.5 text-[11.5px]">
-                                <strong>EN:</strong> The patient has been under outpatient supervision since May 2022 due to severe post-traumatic stress disorder (PTSD) and vegetative-vascular dystonia developed following the tragic death of a close relative. Currently presented repeatedly with a sharp exacerbation of his neuropsychiatric condition caused by physical violence and threats applied against him on 29.06.2023. Complains of persistent insomnia, frequent panic attacks accompanied by suffocation, cold sweat, uncontrollable body tremor, and acute anxiety.
-                            </p>
-                            <p class="lang-ru hidden border-t border-neutral-300 pt-1.5 text-[11.5px]">
-                                <strong>RU:</strong> Пациент находится под амбулаторным наблюдением с мая 2022 г. в связи с тяжелым посттравматическим стрессовым расстройством (ПТСР / PTSD) и вегето-сосудистой дистонией, развившимися вследствие трагической гибели близкого родственника. В настоящее время обратился повторно с резким обострением нервно-психического состояния, обусловленным примененным к нему физическим насилием и угрозами 29.06.2023 г. Жалуется на стойкую бессонницу, частые панические атаки (panic attacks), сопровождающиеся удушьем, холодным потом, неконтролируемой дрожью в теле и острой тревогой.
-                            </p>
                         </td>
                     </tr>
 
@@ -382,12 +331,6 @@
                         <td class="text-justify space-y-2">
                             <p>
                                 Գիտակցությունը՝ պարզ: Դեմքի (աջ ակնակապիճի, շրթունքի) և կողոսկրերի շրջանում առկա են հետտրավմատիկ արյունազեղումներ (հեմատոմաներ): Օջախային նյարդաբանական ախտաբանություն չի հայտնաբերվել: Առկա է արտահայտված վեգետատիվ լաբիլություն, ձեռքերի մատների տրեմոր, էմոցիոնալ լարվածություն: ԶՃ՝ 140/90 մմ ս.ս., պուլս՝ 98 զ/ր:
-                            </p>
-                            <p class="lang-en hidden border-t border-neutral-300 pt-1.5 text-[11.5px]">
-                                <strong>EN:</strong> Consciousness is clear. Post-traumatic hemorrhages (hematomas) are present in the area of the face (right eye socket, lip) and ribs. No focal neurological pathology detected. Marked vegetative lability, tremor of fingers, and emotional tension are present. BP: 140/90 mmHg, Pulse: 98 bpm.
-                            </p>
-                            <p class="lang-ru hidden border-t border-neutral-300 pt-1.5 text-[11.5px]">
-                                <strong>RU:</strong> Сознание ясное. В области лица (правой глазницы, губы) и ребер имеются посттравматические кровоподтеки (гематомы). Очаговой неврологической патологии не выявлено. Отмечается выраженная вегетативная лабильность, тремор пальцев рук, эмоциональное напряжение. АД: 140/90 мм рт. ст., пульс: 98 уд/мин.
                             </p>
                         </td>
                     </tr>
@@ -404,12 +347,6 @@
                                 <div><strong>Հետտրավմատիկ սթրեսային խանգարում (PTSD)՝</strong> ծանր աստիճանի, սրացման փուլում (ICD-10: F43.1):</div>
                                 <div class="mt-0.5"><strong>Վեգետատիվ-անոթային դիստոնիա (ՎԱԴ)՝</strong> հաճախակի պարոքսիզմներով (ICD-10: G90.8):</div>
                             </div>
-                            <div class="lang-en hidden border-t border-neutral-300 pt-1.5 text-[11.5px]">
-                                <strong>EN:</strong> <strong>Post-traumatic stress disorder (PTSD)</strong>, severe degree, acute exacerbation stage (ICD-10: F43.1). <strong>Vegetative-vascular dystonia (VVD)</strong> with frequent paroxysms (ICD-10: G90.8).
-                            </div>
-                            <div class="lang-ru hidden border-t border-neutral-300 pt-1.5 text-[11.5px]">
-                                <strong>RU:</strong> <strong>Посттравматическое стрессовое расстройство (ПТСР)</strong> тяжелой степени, в стадии обострения (ICD-10: F43.1). <strong>Вегето-сосудистая дистония (ВСД)</strong> с частыми пароксизмами (ICD-10: G90.8).
-                            </div>
                         </td>
                     </tr>
 
@@ -425,21 +362,13 @@
                                 <p>1. Շարունակել <strong>Սպիտոմին (Spitomin) 10 մգ</strong> դեղամիջոցի ընդունումը՝ 1 հաբից օրական 2 անգամ:</p>
                                 <p>2. <strong>Բժշկական խիստ ցուցում.</strong> նյարդային համակարգի նոր ցնցումներից և դեկոմպենսացիայից խուսափելու, ինչպես նաև բուժումը շարունակելու նպատակով, որպես բժշկական անհրաժեշտություն, խստիվ ցուցված է ժամանակավորապես լքել երկիրը, փոխել միջավայրը և մեկնել ծովային հանգստի:</p>
                             </div>
-                            <div class="lang-en hidden border-t border-neutral-300 pt-1.5 text-[11.5px] space-y-1">
-                                <p><strong>EN: 1.</strong> Continue taking <strong>Spitomin 10 mg</strong> — 1 tablet twice daily.</p>
-                                <p><strong>2. Strict medical indication:</strong> in order to avoid new shocks to the nervous system and decompensation, as well as to continue treatment, as a medical necessity, it is strictly indicated to temporarily leave the country, change the environment, and go for a seaside rest.</p>
-                            </div>
-                            <div class="lang-ru hidden border-t border-neutral-300 pt-1.5 text-[11.5px] space-y-1">
-                                <p><strong>RU: 1.</strong> Продолжить прием препарата <strong>Спитомин (Spitomin) 10 мг</strong> — по 1 таблетке 2 раза в день.</p>
-                                <p><strong>2. Строгое медицинское предписание:</strong> во избежание новых потрясений нервной системы и декомпенсации, а также с целью продолжения лечения, в качестве медицинской необходимости настоятельно показано временно покинуть страну, сменить обстановку и выехать на морской отдых.</p>
-                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- 7. НИЖНИЙ БЛОК ВЕРИФИКАЦИИ ARMED С РАБОЧИМ QR-КОДОМ (1 В 1 СО СКРИНШОТА) -->
+        <!-- 7. НИЖНИЙ БЛОК ВЕРИФИКАЦИИ ARMED С РАБОЧИМ QR-КОДОМ -->
         <div class="mt-8 pt-2">
             <div class="flex flex-col sm:flex-row items-start gap-6">
                 
@@ -466,14 +395,14 @@
                 </div>
             </div>
 
-            <!-- Три жирные строки с датой и временем выгрузки сертификата пациентом -->
+            <!-- Три жирные строки с датой и временем выгрузки сертификата пациентом (14:30) -->
             <div class="mt-6 text-[13px] sm:text-[13.5px] font-bold leading-[1.38] text-black space-y-0.5">
-                <p>Սերտիֆիկատն արտահանված է (տպված է) ԱՐՄԵԴ համակարգից, (պացիենտի կողմից), <span class="export-timestamp">06/07/2023 14:25</span></p>
-                <p>The certificate is exported (printed) from ARMED system, (by patient), <span class="export-timestamp">06/07/2023 14:25</span></p>
-                <p>Сертификат экспортирован из системы ARMED, (пациентом), <span class="export-timestamp">06/07/2023 14:25</span></p>
+                <p>Սերտիֆիկատն արտահանված է (տպված է) ԱՐՄԵԴ համակարգից, (պացիենտի կողմից), <span class="export-timestamp">06/07/2023 14:30</span></p>
+                <p>The certificate is exported (printed) from ARMED system, (by patient), <span class="export-timestamp">06/07/2023 14:30</span></p>
+                <p>Сертификат экспортирован из системы ARMED, (пациентом), <span class="export-timestamp">06/07/2023 14:30</span></p>
             </div>
 
-            <!-- Строка «Ստորագրիր» внизу слева как на скриншотах ARMED -->
+            <!-- Строка «Ստորագրիր» внизу слева -->
             <div class="mt-6 text-[13.5px] text-black">
                 Ստորագրիր
             </div>
@@ -482,59 +411,20 @@
     </div>
 
     <script>
-        let qrCodeInstance = null;
-
-        // Инициализация живого QR-кода, который сканируется любой камерой телефона
+        // Автоматическая генерация QR-кода со ссылкой на ваш сайт
         function initQRCode() {
-            const input = document.getElementById('qr-url-input');
-            // По умолчанию берется текущий URL файла (когда ты загрузишь его на хостинг, он сразу будет вести на сам файл)
-            const defaultUrl = window.location.href.startsWith('http')
-                ? window.location.href
-                : 'https://armed.am/verify/9FA4C73187031746E20230706AB814D952C7418E63F0128B';
-            input.value = defaultUrl;
-            renderQRCode(defaultUrl);
-        }
-
-        function renderQRCode(textUrl) {
             const container = document.getElementById('qrcode-container');
             container.innerHTML = '';
-            qrCodeInstance = new QRCode(container, {
-                text: textUrl || 'https://armed.am/',
+            const qrUrl = window.location.href.startsWith('http')
+                ? window.location.href
+                : 'https://petros-alt.github.io/armed-extract/';
+            new QRCode(container, {
+                text: qrUrl,
                 width: 156,
                 height: 156,
                 colorDark: '#000000',
                 colorLight: '#ffffff',
                 correctLevel: QRCode.CorrectLevel.M
-            });
-        }
-
-        function updateQRCode() {
-            const val = document.getElementById('qr-url-input').value.trim();
-            renderQRCode(val || 'https://armed.am/');
-        }
-
-        function updateExportDate() {
-            const val = document.getElementById('export-date-input').value;
-            document.querySelectorAll('.export-timestamp').forEach(el => {
-                el.textContent = val;
-            });
-        }
-
-        // Переключение языка клинического описания (Оригинал Հայերեն / Հայերեն + RU / Все 3 языка)
-        function setClinicalLang(mode) {
-            const enBlocks = document.querySelectorAll('.lang-en');
-            const ruBlocks = document.querySelectorAll('.lang-ru');
-
-            enBlocks.forEach(el => el.classList.toggle('hidden', mode !== 'all'));
-            ruBlocks.forEach(el => el.classList.toggle('hidden', mode !== 'hy_ru' && mode !== 'all'));
-
-            ['hy', 'hy_ru', 'all'].forEach(m => {
-                const btn = document.getElementById('btn-lang-' + m);
-                if (m === mode) {
-                    btn.className = 'px-2.5 py-1 rounded bg-emerald-600 text-white font-semibold transition';
-                } else {
-                    btn.className = 'px-2.5 py-1 rounded text-slate-300 hover:text-white font-medium transition';
-                }
             });
         }
 
